@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <title>Hello World</title>
     <script>
-    var ws = new WebSocket('ws://localhost:8080/ws')
-    ws.onopen = function() {
+
+        var ws = new WebSocket('ws://localhost:8080/ws')
+
+        ws.onopen = function() {
         document.getElementById("status").innerHTML = "Connected.";
-    }
-    ws.onmessage = function(event) {
-        var data = event.data;
-        document.getElementById("message").innerHTML = data;
-    }
-    ws.onclose = function() {
+        }
+        ws.onmessage = function(event) {
+            var data = event.data;
+            console.log(data);
+            document.getElementById("response").innerHTML = data;
+        }
+        ws.onclose = function() {
         document.getElementById("status").innerHTML = "Disconnected.";
-    }
-    function myMessage() {
+        }
+        function myMessage() {
         var text = document.getElementById("message").innerHTML
         ws.send(text)
-    }
+        }
     </script>
 
 </head>
@@ -29,7 +32,11 @@
 <p id="status">Status</p>
 <button type="button" onclick="myMessage()">Send Message</button>
 
-<p id="message">Test</p>
+<form action="action_page.php">
+  First name:<br>
+  <input type="text" name="firstname" value="Mickey"><br>
+  <input type="submit" value="Submit">
+</form>
 
 <p id="response">Response goes here</p>
 </body>

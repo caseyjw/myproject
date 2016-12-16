@@ -22,12 +22,13 @@ def websockets(request):
     while True:
         msg = yield from resp.receive()
         print("The message was: ", msg.data)
-        if msg.type == aiohttp.web.MsgType.text:
-            for ws in request.app['sockets'].values():
-                if ws is not resp:
-                    ws.send_str("connected")
-        else:
-            break
+        resp.send_str(msg.data)
+        # if msg.type == aiohttp.web.MsgType.text:
+        #     for ws in request.app['sockets'].values():
+        #         if ws is not resp:
+        #             ws.send_str("connected")
+        # else:
+        #     break
 
     del request.app['sockets'][name]
     for ws in request.app['sockets'].values():
