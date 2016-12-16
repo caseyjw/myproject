@@ -19,8 +19,8 @@
         document.getElementById("status").innerHTML = "Disconnected.";
         }
         function myMessage() {
-        var text = document.getElementById("message").innerHTML
-        ws.send(text)
+        var text = document.getElementById("FirstName").value;
+        ws.send(text);
         }
     </script>
 
@@ -30,12 +30,18 @@
 <button type="button" onclick="myFunction()">Connect WebSocket</button>
 
 <p id="status">Status</p>
-<button type="button" onclick="myMessage()">Send Message</button>
 
-<form action="action_page.php">
-  First name:<br>
-  <input type="text" name="firstname" value="Mickey"><br>
-  <input type="submit" value="Submit">
+
+<form name="form" id="form" method="post" action="">
+    <p class="FirstName">
+        <label for="FirstName">Message to Echo:</label>
+    </p>
+    <p>
+        <input name="FirstName" type="text" id="FirstName" />
+    </p>
+    <p class="submit">
+        <input name="submitButton" type="button" id="submitButton" value="Echo" onClick="myMessage()" />
+    </p>
 </form>
 
 <p id="response">Response goes here</p>
